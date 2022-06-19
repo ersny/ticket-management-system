@@ -1,8 +1,6 @@
 <!doctype html>
 <html lang="en">
-
 @include('layouts.party._head')
-
 <body>
     @include('layouts.party._navigation')
 

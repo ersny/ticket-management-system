@@ -6,6 +6,7 @@ use App\Models\Ticket;
 use Illuminate\Http\Request;
 use App\Http\Requests\TicketUpdateRequest;
 
+
 class TicketController extends Controller
 {
     /**
@@ -26,15 +27,17 @@ class TicketController extends Controller
      */
     public function create()
     {
+        
         return view('tickets.create'); 
     }
 
     public function delete(Ticket $ticket)
     {
+        notify()->success('Ticket Delete Successfully');
         return view('tickets.delete', compact('ticket'));
 
     }
-
+    
 
 
     /**
@@ -50,6 +53,7 @@ class TicketController extends Controller
             'description' => request('description'),
             'status' => request('status'),
         ]);
+        notify()->success('Ticket Create Successfully');
         return redirect()->route('tickets.index');
     }
 
@@ -89,7 +93,7 @@ class TicketController extends Controller
         $ticket->description = request('description');
         $ticket->status = request('status');
         $ticket->save();
-        
+        notify()->success('Ticket Update Successfully');
         return redirect()->route('tickets.index');
     }
 
@@ -102,6 +106,7 @@ class TicketController extends Controller
     public function destroy(Ticket $ticket)
     {
         $ticket->delete();
+        notify()->success('Ticket Delete Successfully');
         return redirect()->route('tickets.index');
     }
 }
